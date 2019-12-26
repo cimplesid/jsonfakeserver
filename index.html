@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Login</title>
+</head>
+<body>
+
+               Email <input type="email" name="email" placeholder="abc@abc.com" /><br>
+               Password <input type="password" name="pass" placeholder="password" /><br>
+            <input type="submit" onclick="validateAndLogin()" value="submit"/>
+                
+</body>
+<script>
+function validateAndLogin(){
+  var email =  document.getElementsByName("email")[0].value;
+  var pass =  document.getElementsByName("pass")[0].value;
+  if(email.length == 0 || !email.includes("@")){
+      alert('Invalid email');
+  }
+  else if( pass.length == 0){
+    alert('Password cannot be empty');
+  }
+  else
+      login(email,pass);
+  
+
+function login(a,b){
+    var user={
+ 
+ "email": "sid@test.com",
+ "password": "webtech"
+
+};
+if(a===user.email&&b===user.password){
+alert('login success');
+}
+else
+alert('login failed please try again');
+}
+
+}
+</script>
+</html>
