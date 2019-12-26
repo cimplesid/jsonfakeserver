@@ -1,8 +1,15 @@
 <?php
+$servername = "localhost";
+$username = "username";
+$password = "password";
 
+$conn = new mysqli($servername, $username, $password);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 $username = $password = "";
 $username_err = $password_err = "";
-$isLoggedIn = false;
+$isLoggedIn = $flag=false,;
  
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
@@ -16,8 +23,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     if(empty($username_err) && empty($password_err)){
         $sql = "SELECT id, username, password FROM users WHERE username = $username , password =$password";
-        if($sql!=null)
-        $isLoggedIn =true;
+        if($conn->query($sql)!=null){
+            $flag=true;
+            $isLoggedIn =true;
+        }
 }
 ?>
  
@@ -29,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
    
 </head>
 <body>
-    <div><?php if($isLoggedIn) echo 'login success' else 'login failed'?></div>
+    <div><?php if($flag && $isLoggedIn) echo 'login success' else 'login failed'?></div>
         <h2>Login</h2>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" onSubmit="validate()">
                 <label>Email</label>
